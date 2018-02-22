@@ -25,6 +25,7 @@ export const keyGen = {
     title: key => `title/${key}`,
     visit: key => `visit/${key}`,
     bookmark: key => `bookmark/${key}`,
+    _: key => key,
 }
 
 export const removeKeyType = key =>
@@ -62,7 +63,7 @@ export async function fetchExistingPage(pageId) {
  */
 export const extractContent = (
     content,
-    { separator = DEFAULT_TERM_SEPARATOR, key = 'term' },
+    { separator = DEFAULT_TERM_SEPARATOR, key = '_' },
 ) =>
     content
         .split(separator)
