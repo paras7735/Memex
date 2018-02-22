@@ -1,3 +1,4 @@
+import newIndex from 'src/search-index'
 import QueryBuilder from './query-builder'
 import { searchConcurrent } from './search-index/search'
 import mapResultsToPouchDocs from './map-search-to-pouch'
@@ -15,6 +16,16 @@ async function indexSearch({
     mapResultsFunc = mapResultsToPouchDocs,
 }) {
     query = query.trim() // Don't count whitespace searches
+
+    const res = await newIndex.search({
+        query,
+        startTime: startDate,
+        endTime: endDate,
+        bookmarks: showOnlyBookmarks,
+        skip,
+        limit,
+    })
+    console.log('new index res:', res)
 
     // Create SI query
     const indexQuery = new QueryBuilder()
